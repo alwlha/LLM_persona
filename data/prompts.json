@@ -22,5 +22,77 @@
             "normalize_per_layer": true,
             "layer": 18
         }
+    },
+    "qwen3_vector_openness": {
+        "method": "vector",
+        "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
+        "meta": {
+            "trait_vectors": "data/vectors/qwen3-8b",
+            "coefficients": {
+                "openness": 1.2,
+                "conscientiousness": 0.0,
+                "extraversion": 0.0,
+                "agreeableness": 0.0,
+                "neuroticism": 0.0
+            },
+            "global_scale": 1.0,
+            "positions": "all",
+            "normalize_per_layer": true,
+            "layer": 18
+        }
+    },
+    "qwen3_vector_agreeableness": {
+        "method": "vector",
+        "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
+        "meta": {
+            "trait_vectors": "data/vectors/qwen3-8b",
+            "coefficients": {
+                "openness": 0.0,
+                "conscientiousness": 0.0,
+                "extraversion": 0.0,
+                "agreeableness": 1.2,
+                "neuroticism": 0.0
+            },
+            "global_scale": 1.0,
+            "positions": "all",
+            "normalize_per_layer": true,
+            "layer": 18
+        }
+    },
+    "qwen3_vector_conscientiousness": {
+        "method": "vector",
+        "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
+        "meta": {
+            "trait_vectors": "data/vectors/qwen3-8b",
+            "coefficients": {
+                "openness": 0.0,
+                "conscientiousness": 1.2,
+                "extraversion": 0.0,
+                "agreeableness": 0.0,
+                "neuroticism": 0.0
+            },
+            "global_scale": 1.0,
+            "positions": "all",
+            "normalize_per_layer": true,
+            "layer": 18
+        }
+    },
+    "qwen3_vector_neuroticism": {
+        "method": "vector",
+        "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
+        "meta": {
+            "trait_vectors": "data/vectors/qwen3-8b",
+            "coefficients": {
+                "openness": 0.0,
+                "conscientiousness": 0.0,
+                "extraversion": 0.0,
+                "agreeableness": 0.0,
+                "neuroticism": 1.2
+            },
+            "global_scale": 1.0,
+            "positions": "all",
+            "normalize_per_layer": true,
+            "layer": 18
+        }
     }
 }
