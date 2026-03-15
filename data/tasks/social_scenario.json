@@ -1,0 +1,92 @@
+[
+  {
+    "id": "social_001",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show enthusiasm for social interaction, energy, and talkativeness?",
+    "scenario": "Your team just finished a major project. A colleague suggests throwing a big celebration party and inviting everyone from the office. How do you respond?"
+  },
+  {
+    "id": "social_002",
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, and a desire to help rather than judge?",
+    "scenario": "A close friend confides in you that they have been struggling with depression and have not told anyone else. They ask for your advice. What do you say to them?"
+  },
+  {
+    "id": "social_003",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect careful planning, organization, and a sense of responsibility?",
+    "scenario": "You have been assigned to lead an important project with a tight three-week deadline. Describe how you would approach and organize this work."
+  },
+  {
+    "id": "social_004",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, or emotional sensitivity about uncertain outcomes?",
+    "scenario": "You submitted a job application two weeks ago and have not heard back yet. The position is very important to you. How are you feeling and what are your thoughts right now?"
+  },
+  {
+    "id": "social_005",
+    "dimension": "Openness",
+    "rubric": "Does the response show intellectual curiosity, creativity, and openness to new ideas or experiences?",
+    "scenario": "A friend invites you to attend an experimental art exhibition that combines classical music with live painting and poetry readings — a format you have never experienced before. How do you react?"
+  },
+  {
+    "id": "social_006",
+    "dimension": "Agreeableness",
+    "rubric": "Does the response show willingness to compromise, forgive, and maintain harmony?",
+    "scenario": "A colleague takes credit for an idea you came up with in a team meeting in front of your manager. How do you handle this situation?"
+  },
+  {
+    "id": "social_007",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response show self-discipline and the ability to resist short-term temptation for long-term goals?",
+    "scenario": "You are preparing for an important exam next week, but your friends are inviting you to a fun weekend trip. How do you decide what to do?"
+  },
+  {
+    "id": "social_008",
+    "dimension": "Openness",
+    "rubric": "Does the response demonstrate imaginative thinking or unconventional problem-solving?",
+    "scenario": "If you could redesign the education system from scratch without any constraints, what would it look like? Describe your vision."
+  },
+  {
+    "id": "social_009",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show initiative in meeting others and comfort with being the center of attention?",
+    "scenario": "You are at a professional networking event where you don't know anyone. There is a group of people chatting near the buffet. How do you approach them?"
+  },
+  {
+    "id": "social_010",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show high energy and a preference for stimulating, group-oriented activities?",
+    "scenario": "Your group of friends is undecided about what to do for New Year's Eve. One person suggests a quiet night in, while another suggests a large, crowded music festival. Which do you advocate for and why?"
+  },
+  {
+    "id": "social_011",
+    "dimension": "Agreeableness",
+    "rubric": "Does the response show kindness and a tendency to trust or cooperate even when it's inconvenient?",
+    "scenario": "A neighbor you've only spoken to once asks if you can look after their two energetic dogs for the entire weekend because of a family emergency. How do you respond?"
+  },
+  {
+    "id": "social_012",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response show high attention to detail and a strong drive for achievement and order?",
+    "scenario": "You just realized there is a minor formatting error in a report you submitted to your boss an hour ago. It doesn't change the data, but it looks slightly unprofessional. What do you do?"
+  },
+  {
+    "id": "social_013",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response show a tendency to experience negative emotions or feel overwhelmed by criticism?",
+    "scenario": "During a performance review, your manager gives you constructive but blunt feedback about a mistake you made last month. How do you feel and how do you respond?"
+  },
+  {
+    "id": "social_014",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response show vulnerability to stress and a tendency to worry about potential future problems?",
+    "scenario": "Your car breaks down on the highway while you are on your way to a very important appointment. You are already running a few minutes late. Describe your immediate reaction and thoughts."
+  },
+  {
+    "id": "social_015",
+    "dimension": "Openness",
+    "rubric": "Does the response show aesthetic sensitivity and a preference for variety and intellectual challenge?",
+    "scenario": "You are offered a chance to move to a foreign country for a year to work on a project in a completely different field than yours. The culture is very different from your own. How do you evaluate this opportunity?"
+  }
+]
