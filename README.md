@@ -72,6 +72,18 @@ python main.py --models gpt-5.2 --tasks bfi
 python main.py --models claude-4.5 --activations baseline high_extraversion --tasks bfi
 ```
 
+### 向量激活测试（合并 assistant-axis 人格向量）
+
+1. 先在 `assistant-axis` 中计算并导出 5 个人格向量（`openness` 等）。
+2. 将导出的 `.pt` 文件复制到 `data/vectors/qwen3-8b/`。
+3. 使用 `data/prompts.json` 中的 `qwen3_vector_extraversion` 激活项运行：
+
+```bash
+python main.py --models Qwen3-8B --tasks bfi --activations qwen3_vector_extraversion
+```
+
+说明：该激活方式通过 `method: "vector"` 读取 `meta` 中的向量配置，并在本地模型推理时进行隐藏层激活注入。
+
 ### 开放生成任务 + 自动评分 (LLM-as-Judge)
 
 运行社交场景生成任务，并让 GPT-5.2 对结果进行打分：

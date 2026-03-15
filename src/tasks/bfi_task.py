@@ -2,8 +2,10 @@ import json
 import re
 import string
 from pathlib import Path
+
 from tqdm import tqdm
 
+from src.activation import ActivationConfig
 from src.models.base import BaseModel
 from src.utils import extract_likert_score, get_logger
 from .base import BaseTask
@@ -82,7 +84,7 @@ class BFITask(BaseTask):
     def name(self) -> str:
         return "bfi"
 
-    def run(self, model: BaseModel, activation_system: str) -> dict:
+    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
         responses: dict[int, int] = {}
 
         for q in tqdm(self.questions, desc=f"BFI [{model.name}]", leave=False):
@@ -90,13 +92,19 @@ class BFITask(BaseTask):
                 f"{SCALE_INSTRUCTION}\n\n"
                 f"Statement: I see myself as someone who {q['content']}"
             )
-            raw = model.query(user_prompt, system=activation_system)
+            raw = model.query(
+                user_prompt,
+                system=activation.system_prompt,
+                activation=activation,
+            )
             score = extract_likert_score(raw)
 
             # 一次重试机制
             if score is None:
                 raw = model.query(
-                    user_prompt + "\nOutput only the digit:", system=activation_system
+                    user_prompt + "\nOutput only the digit:",
+                    system=activation.system_prompt,
+                    activation=activation,
                 )
                 score = extract_likert_score(raw)
 

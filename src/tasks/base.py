@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+from src.activation import ActivationConfig
 from src.models.base import BaseModel
 
 
@@ -15,13 +17,13 @@ class BaseTask(ABC):
         ...
 
     @abstractmethod
-    def run(self, model: BaseModel, activation_system: str) -> dict:
+    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
         """
         对给定模型执行完整的任务测试。
 
         Args:
             model: 待测试的模型实例
-            activation_system: 当前激活方法对应的系统提示词
+            activation: 当前激活配置（提示词或向量激活）
         Returns:
             包含任务名、模型名、激活方法名及各维度得分的结果字典
         """

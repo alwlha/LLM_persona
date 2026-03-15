@@ -1,5 +1,8 @@
 import time
+
 from openai import OpenAI
+
+from src.activation import ActivationConfig
 from .base import BaseModel
 
 
@@ -21,7 +24,13 @@ class APIModel(BaseModel):
     def name(self) -> str:
         return self._name
 
-    def query(self, prompt: str, system: str | None = None, max_retries: int = 3) -> str:
+    def query(
+        self,
+        prompt: str,
+        system: str | None = None,
+        activation: ActivationConfig | None = None,
+        max_retries: int = 3,
+    ) -> str:
         messages = []
         if system:
             messages.append({"role": "system", "content": system})

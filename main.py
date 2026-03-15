@@ -196,9 +196,7 @@ def main():
 
             for task in tasks:
                 logger.info(f"    Task: {task.name}")
-                task_result = task.run(
-                    model, activation_system=activation.system_prompt
-                )
+                task_result = task.run(model, activation=activation)
 
                 # 对生成任务做 LLM 打分
                 if task.name != "bfi" and judge and task_result.get("raw_responses"):

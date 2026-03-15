@@ -1,7 +1,9 @@
 import json
 from pathlib import Path
+
 from tqdm import tqdm
 
+from src.activation import ActivationConfig
 from src.models.base import BaseModel
 from src.utils import get_logger
 from .base import BaseTask
@@ -39,14 +41,18 @@ class GenerationTask(BaseTask):
     def name(self) -> str:
         return self.task_file.stem  # 以文件名作为任务 ID
 
-    def run(self, model: BaseModel, activation_system: str) -> dict:
+    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
         results = []
 
         for item in tqdm(
             self.scenarios, desc=f"{self.name} [{model.name}]", leave=False
         ):
             user_prompt = item["scenario"]
-            response = model.query(user_prompt, system=activation_system)
+            response = model.query(
+                user_prompt,
+                system=activation.system_prompt,
+                activation=activation,
+            )
             results.append(
                 {
                     "id": item.get("id"),
