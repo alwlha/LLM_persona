@@ -1,14 +1,33 @@
-# Python-generated files
+# OS / Editor
+.DS_Store
+.vscode/
+
+# Python cache / build artifacts
 __pycache__/
 *.py[oc]
+*.so
+*.dylib
+*.egg-info/
 build/
 dist/
 wheels/
-*.egg-info
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 
 # Virtual environments
-.venv
+.venv/
+.python-version
 
+# Environment variables
 .env
+.env.*
+!.env.example
 
-/results
+# Experiment outputs
+results/
+
+# Local runtime artifacts
+src/python3.11

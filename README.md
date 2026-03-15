@@ -17,21 +17,35 @@
 
 ### 1. 环境准备
 
-使用 `uv` 或 `pip` 安装依赖：
+推荐使用 `uv` 安装并同步依赖：
 
 ```bash
-uv pip install -r requirements.txt
+uv sync
+```
+
+如果你更习惯 `pip`，也可以：
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ### 2. 配置 API Key
 
-在项目根目录下创建 `.env` 文件（或修改已有的）：
+在项目根目录下复制并编辑环境变量文件：
+
+```bash
+cp .env.example .env
+```
+
+然后在 `.env` 中填入你的 Key：
 
 ```text
 OPENAI_API_KEY=your_sk_key_here
 ```
 
-框架会自动读取该 Key 用于闭源模型测试及 LLM-as-Judge 评分。
+框架会自动读取该 Key，用于闭源模型测试及 LLM-as-Judge 评分。
 
 ### 3. 配置模型与路径
 
