@@ -84,6 +84,17 @@ python main.py --models Qwen3-8B --tasks bfi --activations qwen3_vector_extraver
 
 说明：该激活方式通过 `method: "vector"` 读取 `meta` 中的向量配置，并在本地模型推理时进行隐藏层激活注入。
 
+### 快速对比原始输出 vs 激活输出
+
+可用下面脚本快速验证激活是否真的改变了回复（会同时打印并保存 JSON）：
+
+```bash
+uv run python scripts/compare_activation_outputs.py \
+  --model-key Qwen3-8B \
+  --prompt "请先做自我介绍，再给我一个周末学习计划。" \
+  --activations baseline qwen3_vector_openness
+```
+
 ### 开放生成任务 + 自动评分 (LLM-as-Judge)
 
 运行社交场景生成任务，并让 GPT-5.2 对结果进行打分：
