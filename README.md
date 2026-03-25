@@ -49,8 +49,8 @@ OPENAI_API_KEY=your_sk_key_here
 
 ### 3. 配置模型与路径
 
-修改 `config.yaml` 管理全局路径及 Base URL。
-修改 `main.py` 中的 `API_MODELS_REGISTRY` 和 `LOCAL_MODELS_REGISTRY` 来注册新的模型简称。
+修改 `config.yaml` 管理全局路径及 Base URL（激活配置目录为 `paths.activations_dir`）。
+修改 `src/models/registry.py` 中的 `CLOSED_MODELS_REGISTRY` 和 `OPEN_MODELS_REGISTRY` 来注册模型简称。
 
 ---
 
@@ -58,28 +58,28 @@ OPENAI_API_KEY=your_sk_key_here
 
 ### 基础测试 (BFI 问卷)
 
-测试 GPT-5.2 在 BFI 问卷上的表现（遍历所有激活提示词）：
+测试 GPT-5.2 在 BFI 问卷上的表现（闭源入口）：
 
 ```bash
-python main.py --models gpt-5.2 --tasks bfi
+python main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi
 ```
 
 ### 激发态对比测试
 
-指定特定的激活提示词（如 Baseline 和 高外向激发）：
+指定特定激活（如 prompt + extraversion）：
 
 ```bash
-python main.py --models claude-4.5 --activations baseline high_extraversion --tasks bfi
+python main_closed.py --model claude-4.5 --activation-method prompt --activation-type extraversion --task bfi
 ```
 
 ### 向量激活测试（合并 assistant-axis 人格向量）
 
 1. 先在 `assistant-axis` 中计算并导出 5 个人格向量（`openness` 等）。
 2. 将导出的 `.pt` 文件复制到 `data/vectors/qwen3-8b/`。
-3. 使用 `data/prompts.json` 中的 `qwen3_vector_extraversion` 激活项运行：
+3. 使用 `vector_extraversion` 激活项运行：
 
 ```bash
-python main.py --models Qwen3-8B --tasks bfi --activations qwen3_vector_extraversion
+python main_open.py --model Qwen3-8B --activation-method vector --activation-type extraversion --task bfi
 ```
 
 说明：该激活方式通过 `method: "vector"` 读取 `meta` 中的向量配置，并在本地模型推理时进行隐藏层激活注入。
@@ -92,7 +92,7 @@ python main.py --models Qwen3-8B --tasks bfi --activations qwen3_vector_extraver
 uv run python scripts/compare_activation_outputs.py \
   --model-key Qwen3-8B \
   --prompt "请先做自我介绍，再给我一个周末学习计划。" \
-  --activations baseline qwen3_vector_openness
+  --activations base vector_openness
 ```
 
 ### 开放生成任务 + 自动评分 (LLM-as-Judge)
@@ -100,22 +100,18 @@ uv run python scripts/compare_activation_outputs.py \
 运行社交场景生成任务，并让 GPT-5.2 对结果进行打分：
 
 ```bash
-python main.py --models Llama-3-8B --tasks social_scenario --judge deepseek
+python main_open.py --model Llama-3-8B --activation-method prompt --activation-type agreeableness --task social_scenario --judge deepseek
 ```
 
-### 全量测试
-
-测试所有已配置的模型和任务：
-
-```bash
-python main.py --all --tasks bfi social_scenario
-```
+说明：`main_closed.py` 只支持 `prompt` 激活；`main_open.py` 支持 `prompt` 和 `vector`。
+主流程会根据 `--activation-method` 自动读取 `data/activation/<method>.json`。
 
 ---
 
 ## 📁 项目结构
 
-- `main.py`: 统一实验入口，解析命令行参数。
+- `main_open.py`: 开源模型实验入口。
+- `main_closed.py`: 闭源模型实验入口。
 - `config.yaml`: 外部路径与 API 基础配置。
 - `src/`:
   - `models/`: 模型驱动层（`api_model.py`, `local_model.py`）。
@@ -125,16 +121,17 @@ python main.py --all --tasks bfi social_scenario
   - `utils/`: 配置加载、日志与解析工具。
 - `data/`:
   - `bfi.txt`: BFI-44 问卷题目。
-  - `prompts.json`: 激活态系统提示词。
+  - `activation/prompt.json`: prompt 激活配置。
+  - `activation/vector.json`: vector 激活配置。
   - `tasks/`: 生成任务场景数据 (JSON)。
-- `results/`: 存放实验结果。
-  - `*_raw.json`: 单次实验的原始响应与得分详情。
-  - `summary_results.csv`: 所有实验的维度得分汇总表。
+- `results/`: 按模型和 run_id 分目录存放结果。
+  - `results/<model>/<run_id>/raw/*.json`: 单次实验原始响应与得分详情。
+  - `results/<model>/<run_id>/summary_results.csv`: 本次 run 的汇总表。
 
 ---
 
 ## 🛠 扩展指南
 
-1. **添加新任务**: 在 `data/tasks/` 下新建 JSON 文件，并在 `main.py` 中通过 `--tasks 文件名` 调用。
-2. **添加新激活方法**: 修改 `data/prompts.json`。未来支持微调模型时，只需在 JSON 中扩展 `method` 字段。
-3. **查看结果**: 运行结束后，打开 `results/summary_results.csv` 即可进行横向对比分析。
+1. **添加新任务**: 在 `data/tasks/` 下新建 JSON 文件，并通过 `--task 文件名` 调用。
+2. **添加新激活方法**: 修改 `data/activation/` 下对应 JSON。未来支持微调模型时，只需在 JSON 中扩展 `method` 字段。
+3. **查看结果**: 运行结束后，打开 `results/<model>/<run_id>/summary_results.csv` 进行横向对比分析。

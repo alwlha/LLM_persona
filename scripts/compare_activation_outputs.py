@@ -37,7 +37,7 @@ def parse_args() -> argparse.Namespace:
         "--activations",
         nargs="+",
         required=True,
-        help="要对比的激活名（来自 data/prompts.json）",
+        help="要对比的激活名（来自 data/activation/*.json）",
     )
     parser.add_argument("--model-key", default="Qwen3-8B", help="模型简称")
     parser.add_argument("--model-path", default=None, help="模型路径/名称，优先级高于 --model-key")
@@ -73,12 +73,12 @@ def main() -> None:
 
     model = LocalModel(model_path=model_path, model_name=args.model_key)
 
-    activation_list = load_activations(cfg["paths"]["prompts_file"])
+    activation_list = load_activations(cfg["paths"]["activations_dir"])
     activation_map = {a.name: a for a in activation_list}
 
     missing = [name for name in args.activations if name not in activation_map]
     if missing:
-        raise ValueError(f"这些激活在 prompts.json 中不存在: {missing}")
+        raise ValueError(f"这些激活在 data/activation/*.json 中不存在: {missing}")
 
     results = {
         "timestamp": datetime.now().isoformat(timespec="seconds"),

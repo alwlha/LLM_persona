@@ -12,6 +12,6 @@ api:
 
 paths:
   bfi_file:    "data/bfi.txt"
-  prompts_file: "data/prompts.json"
+  activations_dir: "data/activation"
   tasks_dir:   "data/tasks"
   results_dir: "results"

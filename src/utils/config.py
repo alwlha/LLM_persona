@@ -29,12 +29,11 @@ def load_config(config_path: str | Path | None = None) -> dict:
     cfg.setdefault("paths", {}).setdefault(
         "bfi_file", str(PROJECT_ROOT / "data" / "bfi.txt")
     )
-    cfg.setdefault("paths", {}).setdefault(
-        "prompts_file", str(PROJECT_ROOT / "data" / "prompts.json")
-    )
-    cfg.setdefault("paths", {}).setdefault(
-        "tasks_dir", str(PROJECT_ROOT / "data" / "tasks")
-    )
-    cfg.setdefault("paths", {}).setdefault("results_dir", str(PROJECT_ROOT / "results"))
+    paths = cfg.setdefault("paths", {})
+    if "activations_dir" not in paths and "prompts_file" in paths:
+        paths["activations_dir"] = paths["prompts_file"]
+    paths.setdefault("activations_dir", str(PROJECT_ROOT / "data" / "activation"))
+    paths.setdefault("tasks_dir", str(PROJECT_ROOT / "data" / "tasks"))
+    paths.setdefault("results_dir", str(PROJECT_ROOT / "results"))
 
     return cfg
