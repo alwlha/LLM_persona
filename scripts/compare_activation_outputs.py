@@ -5,7 +5,13 @@ from __future__ import annotations
 import argparse
 import json
 from datetime import datetime
+import sys
 from pathlib import Path
+
+# 将项目根目录加入 sys.path，以便导入 src
+root_dir = Path(__file__).parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.append(str(root_dir))
 
 import torch
 
