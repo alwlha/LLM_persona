@@ -10,18 +10,14 @@ class ActivationConfig:
     name: str  # 如 "base", "high_extraversion", "vector_agreeableness"
     method: str  # "prompt" | "finetune" | "weight"
     system_prompt: str  # 注入模型的系统提示词（prompt 方法直接使用，其他方法作为参考）
-    meta: dict = field(
-        default_factory=dict
-    )  # 微调/权重激活等方法的额外参数（如 adapter_path）
+    meta: dict = field(default_factory=dict)  # 微调/权重激活等方法的额外参数（如 adapter_path）
 
 
 def _parse_activation_dict(raw: dict) -> list[ActivationConfig]:
     activations = []
     for name, value in raw.items():
         if isinstance(value, str):
-            activations.append(
-                ActivationConfig(name=name, method="prompt", system_prompt=value)
-            )
+            activations.append(ActivationConfig(name=name, method="prompt", system_prompt=value))
         elif isinstance(value, dict):
             activations.append(
                 ActivationConfig(
@@ -74,8 +70,10 @@ def load_activations(source: str | Path) -> list[ActivationConfig]:
 
             for key, value in raw.items():
                 if key in merged:
+                    if merged[key] == value:
+                        continue
                     raise ValueError(
-                        f"Duplicate activation name '{key}' in {json_file} and {key_source[key]}"
+                        f"Duplicate activation name '{key}' with different values in {json_file} and {key_source[key]}"
                     )
                 merged[key] = value
                 key_source[key] = json_file
