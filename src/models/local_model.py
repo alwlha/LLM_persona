@@ -18,6 +18,7 @@ class LocalModel(BaseModel):
 
     def __init__(self, model_path: str, model_name: str | None = None):
         self._name = model_name or model_path.split("/")[-1]
+        self._path = model_path
         self._steering_cache: dict[tuple[str, str, str], PersonaSteeringSpec] = {}
         print(f"[LocalModel] Loading '{self._name}' from: {model_path}")
 
@@ -31,9 +32,7 @@ class LocalModel(BaseModel):
             self.device = "cpu"
             dtype = torch.float32
 
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            model_path, trust_remote_code=True
-        )
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
             torch_dtype=dtype,

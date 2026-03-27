@@ -19,4 +19,4 @@ Each file can be either:
 - a dict containing `{"vector": tensor}`.
 
 You can also use a single bundled `.pt` file and set `meta.trait_vectors`
-to that file path in `data/activation/vector.json`.
+to that file path in `data/prompts.json`.

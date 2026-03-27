@@ -4,26 +4,22 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime
 import sys
+from datetime import datetime
 from pathlib import Path
 
-# 将项目根目录加入 sys.path，以便导入 src
+import torch
+
 root_dir = Path(__file__).parent.parent
 if str(root_dir) not in sys.path:
     sys.path.append(str(root_dir))
 
-import torch
-
-from src.activation import build_persona_steering_spec, load_activations
+from src.activation import load_activations
 from src.models.local_model import LocalModel
-from src.utils import load_config
+from src.models.registry import build_open_model, OPEN_MODELS_REGISTRY
+from src.utils import ensure_dir, get_logger, load_config
 
-
-DEFAULT_LOCAL_MODELS = {
-    "Qwen3-8B": "/root/autodl-tmp/Qwen/Qwen3-8B",
-    "Llama-3-8B": "meta-llama/Meta-Llama-3-8B-Instruct",
-}
+logger = get_logger("compare_script")
 
 
 def set_seed(seed: int | None) -> None:
@@ -45,7 +41,12 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="要对比的激活名（来自 data/activation/*.json）",
     )
-    parser.add_argument("--model-key", default="Qwen3-8B", help="模型简称")
+    parser.add_argument(
+        "--model-key",
+        default="Qwen3-8B",
+        choices=list(OPEN_MODELS_REGISTRY),
+        help="预定义模型简称",
+    )
     parser.add_argument("--model-path", default=None, help="模型路径/名称，优先级高于 --model-key")
     parser.add_argument("--config", default=None, help="配置文件路径")
     parser.add_argument(
@@ -62,7 +63,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--save",
         default=None,
-        help="保存对比结果 JSON 的路径（默认保存到 results/activation_compare_时间戳.json）",
+        help="保存对比结果 JSON 的路径（默认自动生成到 results/ 目录下）",
     )
     return parser.parse_args()
 
@@ -71,13 +72,10 @@ def main() -> None:
     args = parse_args()
     cfg = load_config(args.config)
 
-    model_path = args.model_path or DEFAULT_LOCAL_MODELS.get(args.model_key)
-    if not model_path:
-        raise ValueError(
-            f"Unknown model key: {args.model_key}. 请传 --model-path，或使用: {list(DEFAULT_LOCAL_MODELS)}"
-        )
-
-    model = LocalModel(model_path=model_path, model_name=args.model_key)
+    if args.model_path:
+        model = LocalModel(model_path=args.model_path, model_name=args.model_key)
+    else:
+        model = build_open_model(args.model_key)
 
     activation_list = load_activations(cfg["paths"]["activations_dir"])
     activation_map = {a.name: a for a in activation_list}
@@ -89,14 +87,14 @@ def main() -> None:
     results = {
         "timestamp": datetime.now().isoformat(timespec="seconds"),
         "model_key": args.model_key,
-        "model_path": model_path,
+        "model_path": getattr(model, "_path", args.model_path or "registry"),
         "prompt": args.prompt,
         "seed": args.seed,
         "raw": {},
         "activated": [],
     }
 
-    print("\n========== 原始输出（无激活） ==========")
+    print("\n" + "=" * 20 + " 原始输出（无激活） " + "=" * 20)
     set_seed(args.seed)
     raw_text = model.query(prompt=args.prompt, system=args.raw_system or None, activation=None)
     print(raw_text)
@@ -105,33 +103,9 @@ def main() -> None:
         "output": raw_text,
     }
 
-    total_layers = int(getattr(model.model.config, "num_hidden_layers", 0))
-    hidden_size = int(getattr(model.model.config, "hidden_size", 0))
-
     for name in args.activations:
         activation = activation_map[name]
-
-        debug_info: dict[str, object] = {
-            "name": activation.name,
-            "method": activation.method,
-        }
-        if activation.method == "vector":
-            spec = build_persona_steering_spec(
-                meta=activation.meta,
-                model_name=model.name,
-                total_layers=total_layers,
-                hidden_size=hidden_size,
-            )
-            debug_info["layer"] = spec.layer
-            debug_info["positions"] = spec.positions
-            debug_info["vector_norm"] = float(spec.vector.norm().item())
-
-        print(f"\n========== 激活输出: {name} ({activation.method}) ==========")
-        if activation.method == "vector":
-            print(
-                f"[debug] layer={debug_info['layer']} positions={debug_info['positions']} "
-                f"vector_norm={debug_info['vector_norm']:.4f}"
-            )
+        print(f"\n" + "=" * 20 + f" 激活输出: {name} ({activation.method}) " + "=" * 20)
 
         set_seed(args.seed)
         text = model.query(
@@ -147,7 +121,6 @@ def main() -> None:
                 "method": activation.method,
                 "system": activation.system_prompt,
                 "meta": activation.meta,
-                "debug": debug_info,
                 "output": text,
             }
         )
@@ -155,12 +128,35 @@ def main() -> None:
     if args.save:
         save_path = Path(args.save)
     else:
-        save_path = Path(cfg["paths"]["results_dir"]) / (
+        results_dir = ensure_dir(cfg["paths"]["results_dir"])
+        save_path = results_dir / (
             f"activation_compare_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         )
+
+        print(text)
+
+        results["activated"].append(
+            {
+                "activation": name,
+                "method": activation.method,
+                "system": activation.system_prompt,
+                "meta": activation.meta,
+                "output": text,
+            }
+        )
+
+    # 保存结果
+    if args.save:
+        save_path = Path(args.save)
+    else:
+        results_dir = ensure_dir(cfg["paths"]["results_dir"])
+        save_path = results_dir / (
+            f"activation_compare_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
+
     save_path.parent.mkdir(parents=True, exist_ok=True)
     save_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"\n结果已保存: {save_path}")
+    print(f"\n结果已保存至: {save_path}")
 
 
 if __name__ == "__main__":
