@@ -133,27 +133,6 @@ def main() -> None:
             f"activation_compare_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         )
 
-        print(text)
-
-        results["activated"].append(
-            {
-                "activation": name,
-                "method": activation.method,
-                "system": activation.system_prompt,
-                "meta": activation.meta,
-                "output": text,
-            }
-        )
-
-    # 保存结果
-    if args.save:
-        save_path = Path(args.save)
-    else:
-        results_dir = ensure_dir(cfg["paths"]["results_dir"])
-        save_path = results_dir / (
-            f"activation_compare_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        )
-
     save_path.parent.mkdir(parents=True, exist_ok=True)
     save_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n结果已保存至: {save_path}")

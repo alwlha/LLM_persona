@@ -20,14 +20,29 @@ def get_logger(name: str, level: int = logging.INFO) -> logging.Logger:
 
 
 def extract_likert_score(text: str) -> int | None:
-    """
-    从模型输出中提取 1-5 的 Likert 量表评分。
-    支持 '4'、'(4)'、'Score: 4' 等多种格式。
-    """
     if not text:
         return None
-    match = re.search(r"\b([1-5])\b", text)
-    return int(match.group(1)) if match else None
+
+    clean_text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    if not clean_text:
+        clean_text = text
+
+    marker_match = re.search(
+        r"(?:Score|Rating|Rating is|Answer is)[:\s]*([1-5])",
+        clean_text,
+        re.IGNORECASE,
+    )
+    if marker_match:
+        return int(marker_match.group(1))
+
+    direct_match = re.search(r"\b([1-5])\b", clean_text)
+    if direct_match:
+        all_digits = re.findall(r"\b([1-5])\b", clean_text)
+        if len(all_digits) > 1:
+            return int(all_digits[-1])
+        return int(all_digits[0])
+
+    return None
 
 
 def ensure_dir(path: str | Path) -> Path:
