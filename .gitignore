@@ -28,6 +28,7 @@ htmlcov/
 
 # Experiment outputs
 results/
+logs/
 
 # Local runtime artifacts
 src/python3.11
