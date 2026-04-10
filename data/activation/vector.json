@@ -7,7 +7,7 @@
     "method": "vector",
     "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
     "meta": {
-      "trait_vectors": "data/vectors/qwen3-8b",
+      "trait_vectors": "data/vectors/auto",
       "coefficients": {
         "openness": 0.0,
         "conscientiousness": 0.0,
@@ -25,7 +25,7 @@
     "method": "vector",
     "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
     "meta": {
-      "trait_vectors": "data/vectors/qwen3-8b",
+      "trait_vectors": "data/vectors/auto",
       "coefficients": {
         "openness": 1.2,
         "conscientiousness": 0.0,
@@ -43,7 +43,7 @@
     "method": "vector",
     "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
     "meta": {
-      "trait_vectors": "data/vectors/qwen3-8b",
+      "trait_vectors": "data/vectors/auto",
       "coefficients": {
         "openness": 0.0,
         "conscientiousness": 0.0,
@@ -61,7 +61,7 @@
     "method": "vector",
     "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
     "meta": {
-      "trait_vectors": "data/vectors/qwen3-8b",
+      "trait_vectors": "data/vectors/auto",
       "coefficients": {
         "openness": 0.0,
         "conscientiousness": 1.2,
@@ -79,7 +79,7 @@
     "method": "vector",
     "system": "You are taking the Big Five Inventory (BFI) personality test. Please respond to each statement based on your characteristics.",
     "meta": {
-      "trait_vectors": "data/vectors/qwen3-8b",
+      "trait_vectors": "data/vectors/auto",
       "coefficients": {
         "openness": 0.0,
         "conscientiousness": 0.0,

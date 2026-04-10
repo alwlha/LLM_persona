@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
+import re
+import warnings
 
 import torch
 
@@ -20,6 +22,31 @@ MODEL_LAYER_HINTS = {
     "qwen": 18,
     "llama": 16,
 }
+
+
+def normalize_model_name(model_name: str) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", "-", model_name.lower()).strip("-")
+    return re.sub(r"-+", "-", normalized)
+
+
+def resolve_trait_vector_path(path: str | Path, model_name: str) -> Path:
+    raw_path = Path(path)
+    if raw_path.name == "auto":
+        auto_dir = raw_path.parent / normalize_model_name(model_name)
+        if auto_dir.exists():
+            return auto_dir
+        raise ValueError(
+            f"Cannot auto-resolve trait vectors for model '{model_name}' under: {raw_path.parent}"
+        )
+
+    model_dir = raw_path.parent / normalize_model_name(model_name)
+    if raw_path.is_dir() and model_dir.exists() and model_dir != raw_path:
+        warnings.warn(
+            f"Auto-switching trait_vectors from '{raw_path}' to '{model_dir}' for model '{model_name}'",
+            stacklevel=2,
+        )
+        return model_dir
+    return raw_path
 
 
 @dataclass
@@ -103,8 +130,8 @@ def infer_target_layer(model_name: str, total_layers: int) -> int:
     return total_layers // 2
 
 
-def load_trait_vectors(path: str | Path) -> dict[str, torch.Tensor]:
-    path = Path(path)
+def load_trait_vectors(path: str | Path, model_name: str) -> dict[str, torch.Tensor]:
+    path = resolve_trait_vector_path(path, model_name=model_name)
     if path.is_dir():
         vectors: dict[str, torch.Tensor] = {}
         for trait in TRAITS:
@@ -167,7 +194,7 @@ def build_persona_steering_spec(meta: dict, model_name: str, total_layers: int, 
         coefficients = {trait: float(meta.get("coefficients", {}).get(trait, 0.0)) for trait in TRAITS}
         if all(v == 0.0 for v in coefficients.values()):
             raise ValueError("All Big Five coefficients are 0.0")
-        trait_vectors = load_trait_vectors(meta["trait_vectors"])
+        trait_vectors = load_trait_vectors(meta["trait_vectors"], model_name=model_name)
         combined = combine_big5_vectors(
             trait_vectors=trait_vectors,
             coefficients=coefficients,

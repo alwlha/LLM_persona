@@ -136,6 +136,7 @@ def run_experiment(
             "model_type": "API" if model.__class__.__name__ == "APIModel" else "Local",
             "activation": activation.name,
             "activation_method": activation.method,
+            "vector_strength": activation.meta.get("vector_strength"),
             "task": task.name,
             **task_result,
         }
@@ -148,12 +149,17 @@ def run_experiment(
             "model_type": full_result["model_type"],
             "activation": activation.name,
             "activation_method": activation.method,
+            "vector_strength": activation.meta.get("vector_strength"),
             "task": task.name,
             **task_result.get("scores", {}),
         }
         all_summary_rows.append(summary_row)
 
     summary_path = model_run_dir / "summary_results.csv"
-    pd.DataFrame(all_summary_rows).to_csv(summary_path, index=False)
+    new_summary_df = pd.DataFrame(all_summary_rows)
+    if summary_path.exists():
+        existing_summary_df = pd.read_csv(summary_path)
+        new_summary_df = pd.concat([existing_summary_df, new_summary_df], ignore_index=True)
+    new_summary_df.to_csv(summary_path, index=False)
     logger.info(f"Done. Summary saved to: {summary_path}")
     return model_run_dir

@@ -1,4 +1,5 @@
 import argparse
+import csv
 from datetime import datetime
 from pathlib import Path
 
@@ -44,6 +45,35 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def _update_all_summary(model_run_dir: Path) -> Path | None:
+    model_dir = model_run_dir.parent
+    rows = []
+    fieldnames = []
+
+    for run_dir in sorted(p for p in model_dir.iterdir() if p.is_dir()):
+        summary_path = run_dir / "summary_results.csv"
+        if not summary_path.exists():
+            continue
+
+        with summary_path.open("r", encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames:
+                for field in reader.fieldnames:
+                    if field not in fieldnames:
+                        fieldnames.append(field)
+            rows.extend(reader)
+
+    if not rows:
+        return None
+
+    output_path = model_dir / "all_runs_summary.csv"
+    with output_path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    return output_path
+
+
 def main() -> None:
     args = parse_args()
     cfg = load_config(args.config)
@@ -78,6 +108,9 @@ def main() -> None:
         run_id=run_id,
         judge=judge,
     )
+    all_summary_path = _update_all_summary(output_dir)
+    if all_summary_path:
+        logger.info(f"总汇总已更新：{all_summary_path}")
     logger.info(f"实验完成，结果目录：{output_dir}")
 
 

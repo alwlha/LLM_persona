@@ -11,7 +11,8 @@ CLOSED_MODELS_REGISTRY = {
 
 OPEN_MODELS_REGISTRY = {
     "Llama-3-8B": "/root/autodl-tmp/Meta-Llama-3-8B",
-    "Qwen3-8B": "/root/autodl-tmp/Qwen3-8B",
+    "Qwen3-8B": "/home/home_ex/ShareFiles/Models/Qwen/Qwen3-8B",
+    "Qwen3-8B-Instruct": "/home/home_ex/ShareFiles/Models/Qwen/Qwen3-8B-Instruct"
 }
 
 

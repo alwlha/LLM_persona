@@ -84,6 +84,12 @@ python main_open.py --model Qwen3-8B --activation-method vector --activation-typ
 
 说明：该激活方式通过 `method: "vector"` 读取 `meta` 中的向量配置，并在本地模型推理时进行隐藏层激活注入。
 
+如果想在一次运行中连续执行多个激活，可直接传多个 `--activation-type` 参数值；结果会写入同一个 `run_id` 目录并汇总到同一个 `summary_results.csv`：
+
+```bash
+python main_open.py --model Qwen3-8B --activation-method vector --activation-type base extraversion openness --task bfi
+```
+
 ### 快速对比原始输出 vs 激活输出
 
 可用下面脚本快速验证激活是否真的改变了回复（会同时打印并保存 JSON）：
