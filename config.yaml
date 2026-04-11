@@ -8,10 +8,17 @@
 api:
   # API Key 留空则从环境变量 OPENAI_API_KEY 读取
   api_key: ""
-  base_url: "https://xiaoai.plus/v1"
+  base_url: "https://api.bltcy.ai/v1"
 
 paths:
   bfi_file:    "data/bfi.txt"
   activations_dir: "data/activation"
   tasks_dir:   "data/tasks"
   results_dir: "results"
+
+experiments:
+  bragging_num_samples: 1
+  bragging_max_samples:
+  bragging_random_seed: 42
+  api_workers: 8
+  judge_workers: 8

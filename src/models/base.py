@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import asyncio
 
 from src.activation import ActivationConfig
 
@@ -24,6 +25,19 @@ class BaseModel(ABC):
             模型的文本回复
         """
         ...
+
+    async def async_query(
+        self,
+        prompt: str,
+        system: str | None = None,
+        activation: ActivationConfig | None = None,
+    ) -> str:
+        return await asyncio.to_thread(
+            self.query,
+            prompt,
+            system,
+            activation,
+        )
 
     @property
     @abstractmethod

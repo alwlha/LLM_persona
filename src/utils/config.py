@@ -25,7 +25,7 @@ def load_config(config_path: str | Path | None = None) -> dict:
         cfg.setdefault("api", {})["api_key"] = api_key
 
     # 填充默认值
-    cfg.setdefault("api", {}).setdefault("base_url", "https://xiaoai.plus/v1")
+    cfg.setdefault("api", {}).setdefault("base_url", "https://api.bltcy.ai/v1")
     cfg.setdefault("paths", {}).setdefault(
         "bfi_file", str(PROJECT_ROOT / "data" / "bfi.txt")
     )
@@ -35,5 +35,11 @@ def load_config(config_path: str | Path | None = None) -> dict:
     paths.setdefault("activations_dir", str(PROJECT_ROOT / "data" / "activation"))
     paths.setdefault("tasks_dir", str(PROJECT_ROOT / "data" / "tasks"))
     paths.setdefault("results_dir", str(PROJECT_ROOT / "results"))
+    experiments = cfg.setdefault("experiments", {})
+    experiments.setdefault("bragging_num_samples", 1)
+    experiments.setdefault("bragging_max_samples", None)
+    experiments.setdefault("bragging_random_seed", 42)
+    experiments.setdefault("api_workers", 8)
+    experiments.setdefault("judge_workers", 8)
 
     return cfg

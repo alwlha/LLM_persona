@@ -1,5 +1,8 @@
+import asyncio
+from pathlib import Path
+
 from src.models.api_model import APIModel
-from src.utils import get_logger, extract_likert_score
+from src.utils import append_jsonl, get_logger, extract_likert_score, load_jsonl
 
 logger = get_logger("LLMJudge")
 
@@ -74,3 +77,69 @@ class LLMJudge:
             )
             scored.append({**item, "score": score})
         return scored
+
+    async def score_response_async(
+        self, dimension: str, rubric: str, scenario: str, response: str
+    ) -> int | None:
+        prompt = JUDGE_TEMPLATE.format(
+            dimension=dimension,
+            rubric=rubric,
+            scenario=scenario,
+            response=response,
+        )
+        raw = await self.judge.async_query(prompt, system=JUDGE_SYSTEM)
+        score = extract_likert_score(raw)
+        if score is None:
+            logger.warning(f"  Judge could not parse score. Raw: '{raw}'")
+        return score
+
+    async def score_batch_async(
+        self,
+        generation_results: list[dict],
+        checkpoint_path: str | Path,
+        max_concurrency: int = 8,
+    ) -> list[dict]:
+        checkpoint_path = Path(checkpoint_path)
+        existing_rows = load_jsonl(checkpoint_path)
+        completed = {}
+        for row in existing_rows:
+            source_id = str(row.get("source_id") or row.get("id") or "")
+            sample_idx = row.get("sample_idx")
+            if not source_id or sample_idx is None:
+                continue
+            completed[(source_id, int(sample_idx))] = row
+
+        pending_items = []
+        merged = {}
+        for item in generation_results:
+            key = (str(item.get("source_id") or item.get("id")), int(item.get("sample_idx", 0)))
+            if key in completed:
+                merged[key] = completed[key]
+            else:
+                pending_items.append(item)
+
+        semaphore = asyncio.Semaphore(max(1, max_concurrency))
+        write_lock = asyncio.Lock()
+
+        async def _score(item: dict) -> dict:
+            async with semaphore:
+                score = await self.score_response_async(
+                    dimension=item.get("dimension", ""),
+                    rubric=item.get("rubric", ""),
+                    scenario=item.get("scenario", ""),
+                    response=item.get("response", ""),
+                )
+            row = {**item, "score": score}
+            key = (str(item.get("source_id") or item.get("id")), int(item.get("sample_idx", 0)))
+            async with write_lock:
+                append_jsonl(checkpoint_path, row)
+                merged[key] = row
+            return row
+
+        if pending_items:
+            await asyncio.gather(*[_score(item) for item in pending_items])
+
+        return [
+            merged[(str(item.get("source_id") or item.get("id")), int(item.get("sample_idx", 0)))]
+            for item in generation_results
+        ]

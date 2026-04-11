@@ -9,6 +9,7 @@
 - **混合评估 (Evaluation)**：
   - **BFI-44**: 标准人格量表，采用规则计分逻辑。
   - **生成任务**: 社交场景回复任务，支持 **LLM-as-Judge** (由高能力模型打分)。
+  - **Bragging Generation**: 基于 `Potential Social Context` 与 `Speaker's Intent` 的结构化吹嘘句生成任务，支持多指标自动评分。
 - **模块化设计**: 轻松扩展新的模型、激活方法（如微调/权重激活）或测试任务。
 
 ---
@@ -112,6 +113,20 @@ python main_open.py --model Llama-3-8B --activation-method prompt --activation-t
 说明：`main_closed.py` 只支持 `prompt` 激活；`main_open.py` 支持 `prompt` 和 `vector`。
 主流程会根据 `--activation-method` 自动读取 `data/activation/<method>.json`。
 
+### Bragging Generation 任务
+
+运行基于论文附录 prompt 结构的 bragging 生成任务，并使用闭源 judge 对输出按多指标评分：
+
+```bash
+python main_open.py --model Llama-3-8B --activation-method prompt --activation-type base --task bragging_generation --judge gpt-5.2
+```
+
+说明：
+- 任务数据固定读取 `data/tasks/Bragging_data.json`。
+- 生成时仅使用 `original_analysis` 下的 `Potential Social Context` 与 `Speaker's Intent`。
+- 模型可以输出 `<bragging_analysis>`，但落盘结果中的 `response` 只保留最终 bragging sentence。
+- 评分结果会同时写入 `summary_results.csv` 和长表 `metrics_long.csv`。
+
 ---
 
 ## 📁 项目结构
@@ -133,6 +148,7 @@ python main_open.py --model Llama-3-8B --activation-method prompt --activation-t
 - `results/`: 按模型和 run_id 分目录存放结果。
   - `results/<model>/<run_id>/raw/*.json`: 单次实验原始响应与得分详情。
   - `results/<model>/<run_id>/summary_results.csv`: 本次 run 的汇总表。
+  - `results/<model>/<run_id>/metrics_long.csv`: 多指标长表结果，适合后续按 activation / metric / sample 聚合。
 
 ---
 

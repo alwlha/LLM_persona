@@ -3,7 +3,7 @@ from .local_model import LocalModel
 
 
 CLOSED_MODELS_REGISTRY = {
-    "gpt-5.2": "gpt-5.2-2025-12-11",
+    "gpt-5.2": "gpt-5.2",
     "gemini-3.0": "gemini-3-flash-preview-thinking",
     "claude-4.5": "claude-opus-4-5-20251101",
     "deepseek": "deepseek-v3.1",
