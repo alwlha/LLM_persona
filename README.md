@@ -62,7 +62,7 @@ OPENAI_API_KEY=your_sk_key_here
 测试 GPT-5.2 在 BFI 问卷上的表现（闭源入口）：
 
 ```bash
-python main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi
+uv run main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi
 ```
 
 ### 激发态对比测试
@@ -70,7 +70,7 @@ python main_closed.py --model gpt-5.2 --activation-method prompt --activation-ty
 指定特定激活（如 prompt + extraversion）：
 
 ```bash
-python main_closed.py --model claude-4.5 --activation-method prompt --activation-type extraversion --task bfi
+uv run main_closed.py --model claude-4.5 --activation-method prompt --activation-type extraversion --task bfi
 ```
 
 ### 向量激活测试（合并 assistant-axis 人格向量）
@@ -80,7 +80,7 @@ python main_closed.py --model claude-4.5 --activation-method prompt --activation
 3. 使用 `vector_extraversion` 激活项运行：
 
 ```bash
-python main_open.py --model Qwen3-8B --activation-method vector --activation-type extraversion --task bfi
+uv run main_open.py --model Qwen3-8B-Instruct --activation-method vector --activation-type extraversion --task bfi
 ```
 
 说明：该激活方式通过 `method: "vector"` 读取 `meta` 中的向量配置，并在本地模型推理时进行隐藏层激活注入。
@@ -88,7 +88,7 @@ python main_open.py --model Qwen3-8B --activation-method vector --activation-typ
 如果想在一次运行中连续执行多个激活，可直接传多个 `--activation-type` 参数值；结果会写入同一个 `run_id` 目录并汇总到同一个 `summary_results.csv`：
 
 ```bash
-python main_open.py --model Qwen3-8B --activation-method vector --activation-type base extraversion openness --task bfi
+uv run main_open.py --model Qwen3-8B-Instruct --activation-method vector --activation-type base extraversion openness --task bfi
 ```
 
 ### 快速对比原始输出 vs 激活输出
@@ -107,7 +107,7 @@ uv run python scripts/compare_activation_outputs.py \
 运行社交场景生成任务，并让 GPT-5.2 对结果进行打分：
 
 ```bash
-python main_open.py --model Llama-3-8B --activation-method prompt --activation-type agreeableness --task social_scenario --judge deepseek
+uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activation-type agreeableness --task social_scenario --judge deepseek
 ```
 
 说明：`main_closed.py` 只支持 `prompt` 激活；`main_open.py` 支持 `prompt` 和 `vector`。
@@ -118,7 +118,7 @@ python main_open.py --model Llama-3-8B --activation-method prompt --activation-t
 运行基于论文附录 prompt 结构的 bragging 生成任务，并使用闭源 judge 对输出按多指标评分：
 
 ```bash
-python main_open.py --model Llama-3-8B --activation-method prompt --activation-type base --task bragging_generation --judge gpt-5.2
+uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activation-type extraversion agreeableness conscientiousness neuroticism openness --task bragging_generation --judge deepseek
 ```
 
 说明：

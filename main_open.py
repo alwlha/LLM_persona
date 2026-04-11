@@ -20,45 +20,18 @@ logger = get_logger("main_open")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="开源模型人格实验入口")
-    parser.add_argument(
-        "--model",
-        required=True,
-        choices=list(OPEN_MODELS_REGISTRY),
-        help="开源模型简称",
-    )
-    parser.add_argument(
-        "--activation-method",
-        default="prompt",
-        choices=["prompt", "vector"],
-        help="激活方法",
-    )
-    parser.add_argument(
-        "--activation-type",
-        nargs="+",
-        action="append",
-        default=None,
-        choices=ACTIVATION_TYPES,
-        help="激活类型，支持一次传多个值或重复传参",
-    )
+    parser.add_argument("--model", required=True, choices=list(OPEN_MODELS_REGISTRY), help="开源模型简称")
+    parser.add_argument("--activation-method", default="prompt", choices=["prompt", "vector"], help="激活方法")
+    parser.add_argument("--activation-type", nargs="+", action="append", default=None, choices=ACTIVATION_TYPES, help="激活类型，支持一次传多个值或重复传参")
     parser.add_argument("--task", default="bfi", choices=TASK_TYPES, help="任务类型")
-    parser.add_argument(
-        "--judge",
-        default=None,
-        choices=list(CLOSED_MODELS_REGISTRY),
-        help="生成任务可选评分模型（闭源 API）",
-    )
+    parser.add_argument("--judge", default=None, choices=list(CLOSED_MODELS_REGISTRY), help="生成任务可选评分模型（闭源 API）")
     parser.add_argument("--config", default=None, help="配置文件路径")
     parser.add_argument("--api_key", default=None, help="覆盖 config 中 API Key（用于 judge）")
     parser.add_argument("--base_url", default=None, help="覆盖 config 中 Base URL（用于 judge 或闭源 API）")
     parser.add_argument("--run-id", default=None, help="运行 ID（默认自动生成）")
     parser.add_argument("--api-workers", type=int, default=None, help="生成阶段并发 worker 数")
     parser.add_argument("--judge-workers", type=int, default=None, help="评分阶段并发 worker 数")
-    parser.add_argument(
-        "--vector-strength",
-        type=float,
-        default=None,
-        help="统一覆盖本次 vector 激活中的非零 coefficient 强度",
-    )
+    parser.add_argument("--vector-strength", type=float, default=None, help="统一覆盖本次 vector 激活中的非零 coefficient 强度")
     return parser.parse_args()
 
 
