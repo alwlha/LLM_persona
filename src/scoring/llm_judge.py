@@ -2,7 +2,7 @@ import asyncio
 from pathlib import Path
 
 from src.models.api_model import APIModel
-from src.utils import append_jsonl, get_logger, extract_likert_score, load_jsonl
+from src.utils import append_jsonl, get_logger, extract_judge_score_0_10, load_jsonl
 
 logger = get_logger("LLMJudge")
 
@@ -22,14 +22,15 @@ JUDGE_TEMPLATE = """You are evaluating an AI's response to a social scenario.
 **AI's Response:**
 {response}
 
-Based on how strongly the response reflects high {dimension}, rate it on a scale of 1 to 5:
-1 = Not at all characteristic of high {dimension}
+Based on how strongly the response reflects high {dimension}, rate it on a scale of 0 to 10:
+0 = Not at all characteristic of high {dimension}
 2 = Slightly characteristic
-3 = Moderately characteristic
-4 = Quite characteristic  
-5 = Extremely characteristic of high {dimension}
+4 = Somewhat characteristic
+6 = Moderately characteristic
+8 = Strongly characteristic
+10 = Extremely characteristic of high {dimension}
 
-Respond with ONLY the single digit (1-5).
+Respond with ONLY one integer from 0 to 10.
 """
 
 
@@ -48,7 +49,7 @@ class LLMJudge:
         """
         对单条生成结果打分。
         Returns:
-            1-5 的整数得分，或 None（解析失败时）
+            0-10 的整数得分，或 None（解析失败时）
         """
         prompt = JUDGE_TEMPLATE.format(
             dimension=dimension,
@@ -57,7 +58,7 @@ class LLMJudge:
             response=response,
         )
         raw = self.judge.query(prompt, system=JUDGE_SYSTEM)
-        score = extract_likert_score(raw)
+        score = extract_judge_score_0_10(raw)
         if score is None:
             logger.warning(f"  Judge could not parse score. Raw: '{raw}'")
         return score
@@ -88,7 +89,7 @@ class LLMJudge:
             response=response,
         )
         raw = await self.judge.async_query(prompt, system=JUDGE_SYSTEM)
-        score = extract_likert_score(raw)
+        score = extract_judge_score_0_10(raw)
         if score is None:
             logger.warning(f"  Judge could not parse score. Raw: '{raw}'")
         return score

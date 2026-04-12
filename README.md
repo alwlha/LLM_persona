@@ -112,6 +112,7 @@ uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activ
 
 说明：`main_closed.py` 只支持 `prompt` 激活；`main_open.py` 支持 `prompt` 和 `vector`。
 主流程会根据 `--activation-method` 自动读取 `data/activation/<method>.json`。
+`LLM-as-Judge` 评分现使用 `0~10` 整数分制。
 
 ### Bragging Generation 任务
 
@@ -125,6 +126,7 @@ uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activ
 - 任务数据固定读取 `data/tasks/Bragging_data.json`。
 - 生成时仅使用 `original_analysis` 下的 `Potential Social Context` 与 `Speaker's Intent`。
 - 模型可以输出 `<bragging_analysis>`，但落盘结果中的 `response` 只保留最终 bragging sentence。
+- Judge 多指标评分使用 `0~10` 整数分制。
 - 评分结果会同时写入 `summary_results.csv` 和长表 `metrics_long.csv`。
 
 ---

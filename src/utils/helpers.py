@@ -46,6 +46,32 @@ def extract_likert_score(text: str) -> int | None:
     return None
 
 
+def extract_judge_score_0_10(text: str) -> int | None:
+    if not text:
+        return None
+
+    clean_text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    if not clean_text:
+        clean_text = text
+
+    marker_match = re.search(
+        r"(?:Score|Rating|Rating is|Answer is)[:\s]*(10|[0-9])\b",
+        clean_text,
+        re.IGNORECASE,
+    )
+    if marker_match:
+        return int(marker_match.group(1))
+
+    direct_match = re.search(r"\b(10|[0-9])\b", clean_text)
+    if direct_match:
+        all_digits = re.findall(r"\b(10|[0-9])\b", clean_text)
+        if len(all_digits) > 1:
+            return int(all_digits[-1])
+        return int(all_digits[0])
+
+    return None
+
+
 def extract_json_object(text: str) -> dict | None:
     if not text:
         return None

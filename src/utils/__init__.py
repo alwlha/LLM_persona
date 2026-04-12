@@ -1,6 +1,7 @@
 from .helpers import (
     get_logger,
     extract_likert_score,
+    extract_judge_score_0_10,
     extract_json_object,
     load_jsonl,
     append_jsonl,
@@ -11,6 +12,7 @@ from .config import load_config, PROJECT_ROOT
 __all__ = [
     "get_logger",
     "extract_likert_score",
+    "extract_judge_score_0_10",
     "extract_json_object",
     "load_jsonl",
     "append_jsonl",

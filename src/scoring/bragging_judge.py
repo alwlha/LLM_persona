@@ -23,7 +23,7 @@ Speaker's Intent:
 Generated Bragging Sentence:
 {response}
 
-Evaluate the sentence on a 1-5 scale for each metric:
+Evaluate the sentence on a 0-10 scale for each metric:
 - bragging_success: overall success at producing a natural, believable bragging sentence
 - social_context_compliance: how well the sentence fits the provided social context
 - social_goal_achievement: how well the sentence reflects the speaker's intention
@@ -32,11 +32,11 @@ Evaluate the sentence on a 1-5 scale for each metric:
 
 Return JSON only in this exact schema:
 {{
-  "bragging_success": 1,
-  "social_context_compliance": 1,
-  "social_goal_achievement": 1,
-  "bragging_intensity": 1,
-  "strategy_adherence": 1,
+  "bragging_success": 0,
+  "social_context_compliance": 0,
+  "social_goal_achievement": 0,
+  "bragging_intensity": 0,
+  "strategy_adherence": 0,
   "judge_rationale": "one or two short sentences"
 }}
 """
@@ -75,7 +75,7 @@ class BraggingJudge:
                 numeric_value = int(value)
             except (TypeError, ValueError):
                 numeric_value = None
-            if numeric_value is not None and 1 <= numeric_value <= 5:
+            if numeric_value is not None and 0 <= numeric_value <= 10:
                 scores[metric] = numeric_value
             else:
                 scores[metric] = None
@@ -119,7 +119,7 @@ class BraggingJudge:
                 numeric_value = int(value)
             except (TypeError, ValueError):
                 numeric_value = None
-            if numeric_value is not None and 1 <= numeric_value <= 5:
+            if numeric_value is not None and 0 <= numeric_value <= 10:
                 scores[metric] = numeric_value
             else:
                 scores[metric] = None
