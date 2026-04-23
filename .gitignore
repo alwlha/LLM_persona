@@ -32,6 +32,7 @@ logs/
 
 # Local runtime artifacts
 src/python3.11
+*.pdf
 
 # trained vector(.pt)
 data/vectors
