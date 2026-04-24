@@ -11,6 +11,7 @@ from src.models import (
     build_closed_model,
     build_open_model,
 )
+from src.prompting import PROMPT_STRATEGIES, PromptStrategy
 from src.runner import ACTIVATION_TYPES, TASK_TYPES, build_tasks, resolve_activation, run_experiment
 from src.scoring import BraggingJudge, LLMJudge
 from src.utils import get_logger, load_config
@@ -24,6 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--activation-method", default="prompt", choices=["prompt", "vector"], help="激活方法")
     parser.add_argument("--activation-type", nargs="+", action="append", default=None, choices=ACTIVATION_TYPES, help="激活类型，支持一次传多个值或重复传参")
     parser.add_argument("--task", default="bfi", choices=TASK_TYPES, help="任务类型")
+    parser.add_argument("--prompt-strategy", default="base", choices=PROMPT_STRATEGIES, help="提示学习策略")
     parser.add_argument("--judge", default=None, choices=list(CLOSED_MODELS_REGISTRY), help="生成任务可选评分模型（闭源 API）")
     parser.add_argument("--config", default=None, help="配置文件路径")
     parser.add_argument("--api_key", default=None, help="覆盖 config 中 API Key（用于 judge）")
@@ -145,6 +147,7 @@ def main() -> None:
         judge = BraggingJudge(judge_model) if args.task == "bragging_generation" else LLMJudge(judge_model)
 
     run_id = args.run_id or datetime.now().strftime("run_%Y%m%d_%H%M%S")
+    prompt_strategy = PromptStrategy(args.prompt_strategy)
     output_dir = None
     for index, activation_type in enumerate(activation_types, start=1):
         activation = resolve_activation(
@@ -166,6 +169,7 @@ def main() -> None:
             model=model,
             tasks=tasks,
             activation=activation,
+            prompt_strategy=prompt_strategy,
             results_root=cfg["paths"]["results_dir"],
             run_id=run_id,
             judge=judge,

@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 from src.activation import ActivationConfig
 from src.models.base import BaseModel
+from src.prompting import PromptStrategy, build_prompt_package
 from src.utils import append_jsonl, get_logger, load_jsonl
 from .base import BaseTask
 
@@ -159,7 +160,12 @@ class BraggingGenerationTask(BaseTask):
     def name(self) -> str:
         return "bragging_generation"
 
-    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
+    def run(
+        self,
+        model: BaseModel,
+        activation: ActivationConfig,
+        prompt_strategy: PromptStrategy,
+    ) -> dict:
         results = []
 
         for item in tqdm(
@@ -169,14 +175,15 @@ class BraggingGenerationTask(BaseTask):
                 social_context=item["social_context"],
                 speaker_intent=item["speaker_intent"],
             )
-            prompt = BRAGGING_PROMPT_TEMPLATE.format(
+            base_prompt = BRAGGING_PROMPT_TEMPLATE.format(
                 social_context=item["social_context"],
                 speaker_intent=item["speaker_intent"],
             )
+            prompt_package = build_prompt_package(self.name, base_prompt, prompt_strategy)
 
             for sample_idx in range(1, self.num_samples + 1):
                 raw_output = model.query(
-                    prompt,
+                    prompt_package["prompt"],
                     system=activation.system_prompt,
                     activation=activation,
                 )
@@ -187,6 +194,7 @@ class BraggingGenerationTask(BaseTask):
                         "source_id": item["id"],
                         "sample_idx": sample_idx,
                         "scenario": scenario,
+                        "prompt": prompt_package["prompt"],
                         "response": final_sentence,
                         "raw_output": raw_output,
                         "parse_ok": parse_ok,
@@ -207,6 +215,7 @@ class BraggingGenerationTask(BaseTask):
         self,
         model: BaseModel,
         activation: ActivationConfig,
+        prompt_strategy: PromptStrategy,
         checkpoint_path: str | Path,
         max_concurrency: int = 8,
     ) -> dict:
@@ -226,10 +235,11 @@ class BraggingGenerationTask(BaseTask):
                 social_context=item["social_context"],
                 speaker_intent=item["speaker_intent"],
             )
-            prompt = BRAGGING_PROMPT_TEMPLATE.format(
+            base_prompt = BRAGGING_PROMPT_TEMPLATE.format(
                 social_context=item["social_context"],
                 speaker_intent=item["speaker_intent"],
             )
+            prompt_package = build_prompt_package(self.name, base_prompt, prompt_strategy)
             for sample_idx in range(1, self.num_samples + 1):
                 key = (item["id"], sample_idx)
                 if key in completed:
@@ -239,7 +249,7 @@ class BraggingGenerationTask(BaseTask):
                         "item": item,
                         "sample_idx": sample_idx,
                         "scenario": scenario,
-                        "prompt": prompt,
+                        "prompt": prompt_package["prompt"],
                     }
                 )
 
@@ -285,6 +295,7 @@ class BraggingGenerationTask(BaseTask):
                 "source_id": job["item"]["id"],
                 "sample_idx": job["sample_idx"],
                 "scenario": job["scenario"],
+                "prompt": job["prompt"],
                 "response": final_sentence,
                 "raw_output": raw_output,
                 "parse_ok": parse_ok,

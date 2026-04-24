@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from src.activation import ActivationConfig
 from src.models.base import BaseModel
+from src.prompting import PromptStrategy
 
 
 class BaseTask(ABC):
@@ -17,13 +18,19 @@ class BaseTask(ABC):
         ...
 
     @abstractmethod
-    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
+    def run(
+        self,
+        model: BaseModel,
+        activation: ActivationConfig,
+        prompt_strategy: PromptStrategy,
+    ) -> dict:
         """
         对给定模型执行完整的任务测试。
 
         Args:
             model: 待测试的模型实例
             activation: 当前激活配置（提示词或向量激活）
+            prompt_strategy: 当前提示策略配置
         Returns:
             包含任务名、模型名、激活方法名及各维度得分的结果字典
         """

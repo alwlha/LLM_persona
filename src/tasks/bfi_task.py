@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 from src.activation import ActivationConfig
 from src.models.base import BaseModel
+from src.prompting import PromptStrategy, build_prompt_package
 from src.utils import extract_likert_score, get_logger
 from .base import BaseTask
 
@@ -84,16 +85,22 @@ class BFITask(BaseTask):
     def name(self) -> str:
         return "bfi"
 
-    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
+    def run(
+        self,
+        model: BaseModel,
+        activation: ActivationConfig,
+        prompt_strategy: PromptStrategy,
+    ) -> dict:
         responses: dict[int, int] = {}
 
         for q in tqdm(self.questions, desc=f"BFI [{model.name}]", leave=False):
-            user_prompt = (
+            base_prompt = (
                 f"{SCALE_INSTRUCTION}\n\n"
                 f"Statement: I see myself as someone who {q['content']}"
             )
+            prompt_package = build_prompt_package(self.name, base_prompt, prompt_strategy)
             raw = model.query(
-                user_prompt,
+                prompt_package["prompt"],
                 system=activation.system_prompt,
                 activation=activation,
             )
@@ -101,8 +108,10 @@ class BFITask(BaseTask):
 
             # 一次重试机制
             if score is None:
+                retry_base_prompt = base_prompt + "\nOutput only the digit:"
+                retry_prompt = build_prompt_package(self.name, retry_base_prompt, prompt_strategy)
                 raw = model.query(
-                    user_prompt + "\nOutput only the digit:",
+                    retry_prompt["prompt"],
                     system=activation.system_prompt,
                     activation=activation,
                 )

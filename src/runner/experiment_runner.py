@@ -7,6 +7,7 @@ from collections import defaultdict
 import pandas as pd
 
 from src.activation import ActivationConfig
+from src.prompting import PromptStrategy
 from src.tasks import BFITask, BraggingGenerationTask, GenerationTask
 from src.utils import ensure_dir, get_logger
 
@@ -97,7 +98,7 @@ def build_tasks(task_keys: list[str], cfg: dict) -> list:
 
 
 def _save_raw_result(result: dict, raw_dir: Path):
-    fname = f"{result['activation']}_{result['task']}_raw.json"
+    fname = f"{result['activation']}_{result['prompt_strategy']}_{result['task']}_raw.json"
     out_path = raw_dir / fname
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
@@ -134,11 +135,14 @@ def _build_metric_rows(
     model_key: str,
     model_type: str,
     activation: ActivationConfig,
+    prompt_strategy: PromptStrategy,
     task_name: str,
 ) -> list[dict]:
     metric_rows = []
 
     for item in raw_responses:
+        if not isinstance(item, dict):
+            continue
         judge_scores = item.get("judge_scores") or {}
         for metric, value in judge_scores.items():
             if metric in {"judge_rationale", "judge_raw_output"}:
@@ -154,6 +158,7 @@ def _build_metric_rows(
                     "activation": activation.name,
                     "activation_method": activation.method,
                     "vector_strength": activation.meta.get("vector_strength"),
+                    "prompt_strategy": prompt_strategy.name,
                     "task": task_name,
                     "source_id": item.get("source_id"),
                     "item_id": item.get("id"),
@@ -173,6 +178,7 @@ def _build_metric_rows(
                     "activation": activation.name,
                     "activation_method": activation.method,
                     "vector_strength": activation.meta.get("vector_strength"),
+                    "prompt_strategy": prompt_strategy.name,
                     "task": task_name,
                     "source_id": item.get("source_id"),
                     "item_id": item.get("id"),
@@ -190,6 +196,7 @@ def run_experiment(
     model,
     tasks: list,
     activation: ActivationConfig,
+    prompt_strategy: PromptStrategy,
     results_root: str | Path,
     run_id: str,
     judge: object | None = None,
@@ -206,6 +213,7 @@ def run_experiment(
     logger.info(f"Model: {model_key}")
     logger.info(f"Run ID: {run_id}")
     logger.info(f"Activation: [{activation.name}] ({activation.method})")
+    logger.info(f"Prompt strategy: {prompt_strategy.name}")
 
     for task in tasks:
         logger.info(f"Task: {task.name}")
@@ -214,6 +222,7 @@ def run_experiment(
                 task=task,
                 model=model,
                 activation=activation,
+                prompt_strategy=prompt_strategy,
                 judge=judge,
                 raw_dir=raw_dir,
                 api_workers=api_workers,
@@ -230,6 +239,7 @@ def run_experiment(
             "activation": activation.name,
             "activation_method": activation.method,
             "vector_strength": activation.meta.get("vector_strength"),
+            "prompt_strategy": prompt_strategy.name,
             "task": task.name,
             **task_result,
         }
@@ -242,6 +252,7 @@ def run_experiment(
                 model_key=model_key,
                 model_type=full_result["model_type"],
                 activation=activation,
+                prompt_strategy=prompt_strategy,
                 task_name=task.name,
             )
         )
@@ -254,6 +265,7 @@ def run_experiment(
             "activation": activation.name,
             "activation_method": activation.method,
             "vector_strength": activation.meta.get("vector_strength"),
+            "prompt_strategy": prompt_strategy.name,
             "task": task.name,
             **task_result.get("scores", {}),
         }
@@ -283,23 +295,26 @@ async def _run_task_with_optional_async(
     task,
     model,
     activation: ActivationConfig,
+    prompt_strategy: PromptStrategy,
     judge: object | None,
     raw_dir: Path,
     api_workers: int,
     judge_workers: int,
 ) -> dict:
-    responses_checkpoint = raw_dir / f"{activation.name}_{task.name}_responses.jsonl"
-    judged_checkpoint = raw_dir / f"{activation.name}_{task.name}_judged.jsonl"
+    prefix = f"{activation.name}_{prompt_strategy.name}_{task.name}"
+    responses_checkpoint = raw_dir / f"{prefix}_responses.jsonl"
+    judged_checkpoint = raw_dir / f"{prefix}_judged.jsonl"
 
     if hasattr(task, "run_async"):
         task_result = await task.run_async(
             model=model,
             activation=activation,
+            prompt_strategy=prompt_strategy,
             checkpoint_path=responses_checkpoint,
             max_concurrency=api_workers,
         )
     else:
-        task_result = await asyncio.to_thread(task.run, model, activation)
+        task_result = await asyncio.to_thread(task.run, model, activation, prompt_strategy)
 
     if task.name != "bfi" and judge and task_result.get("raw_responses"):
         logger.info("Running LLM Judge...")

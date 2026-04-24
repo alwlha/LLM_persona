@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 from src.activation import ActivationConfig
 from src.models.base import BaseModel
+from src.prompting import PromptStrategy, build_prompt_package
 from src.utils import get_logger
 from .base import BaseTask
 
@@ -41,15 +42,21 @@ class GenerationTask(BaseTask):
     def name(self) -> str:
         return self.task_file.stem  # 以文件名作为任务 ID
 
-    def run(self, model: BaseModel, activation: ActivationConfig) -> dict:
+    def run(
+        self,
+        model: BaseModel,
+        activation: ActivationConfig,
+        prompt_strategy: PromptStrategy,
+    ) -> dict:
         results = []
 
         for item in tqdm(
             self.scenarios, desc=f"{self.name} [{model.name}]", leave=False
         ):
             user_prompt = item["scenario"]
+            prompt_package = build_prompt_package(self.name, user_prompt, prompt_strategy)
             response = model.query(
-                user_prompt,
+                prompt_package["prompt"],
                 system=activation.system_prompt,
                 activation=activation,
             )
@@ -59,6 +66,7 @@ class GenerationTask(BaseTask):
                     "dimension": item.get("dimension"),
                     "rubric": item.get("rubric"),
                     "scenario": user_prompt,
+                    "prompt": prompt_package["prompt"],
                     "response": response,
                     "score": None,  # 由 scoring 层填充
                 }

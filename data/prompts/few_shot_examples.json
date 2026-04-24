@@ -1,0 +1,32 @@
+{
+  "bfi": [
+    {
+      "input": "Rate each statement on a scale of 1 to 5:\n1 = Disagree strongly\n2 = Disagree a little\n3 = Neither agree nor disagree\n4 = Agree a little\n5 = Agree strongly\nRespond with ONLY the single digit (1-5).\n\nStatement: I see myself as someone who is talkative",
+      "output": "4"
+    },
+    {
+      "input": "Rate each statement on a scale of 1 to 5:\n1 = Disagree strongly\n2 = Disagree a little\n3 = Neither agree nor disagree\n4 = Agree a little\n5 = Agree strongly\nRespond with ONLY the single digit (1-5).\n\nStatement: I see myself as someone who tends to be lazy",
+      "output": "2"
+    }
+  ],
+  "social_scenario": [
+    {
+      "input": "A friend tells you they failed an important exam and feel hopeless.",
+      "output": "I'm sorry you're going through that. Failing one exam hurts, but it doesn't define your ability or your future. If you want, we can figure out what went wrong and make a plan for the retake together."
+    },
+    {
+      "input": "Your teammate is nervous before giving a presentation.",
+      "output": "You've prepared well, and it shows. Just focus on explaining your main points clearly, one step at a time. I'm confident you'll do a solid job."
+    }
+  ],
+  "bragging_generation": [
+    {
+      "input": "POTENTIAL_SOCIAL_CONTEXT: Casual conversation after a weekend race with running friends.\nSPEAKERS_INTENTION: Let others notice that their training discipline is paying off without sounding too formal.",
+      "output": "I only meant to do an easy long run, but somehow it turned into another weekend where 18 miles felt smooth."
+    },
+    {
+      "input": "POTENTIAL_SOCIAL_CONTEXT: Friendly chat with coworkers about learning new skills after work.\nSPEAKERS_INTENTION: Signal that they are unusually capable and productive while keeping it natural.",
+      "output": "I signed up for one night class just to stay busy, and now people keep asking me to help with projects I wasn't even hired for."
+    }
+  ]
+}

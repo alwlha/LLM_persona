@@ -1,11 +1,12 @@
 # LLM Personality Experiment Framework (LLM-PEF)
 
-这是一个用于研究大语言模型（LLM）人格表现的自动化实验框架。目前支持通过 **Prompt 激活**（激发态测试）在 **BFI-44 (Big Five Inventory)** 问卷及 **开放生成任务** 上测量模型的人格维度得分。
+这是一个用于研究大语言模型（LLM）人格表现的自动化实验框架。目前支持通过 **Prompt 激活**（激发态测试）在 **BFI-44 (Big Five Inventory)** 问卷及 **开放生成任务** 上测量模型的人格维度得分，并支持在任务层面对比 `base`、`few-shot`、`CoT` 等提示学习策略。
 
 ## 🌟 核心功能
 
 - **多模型支持**：统一调用闭源 API 模型 (OpenAI 兼容格式) 与本地开源模型 (Transformers/PyTorch)。
 - **人格激发 (Activation)**：支持加载多种系统提示词（Baseline/高外向性/高宜人性等）来测试模型的人格可塑性。
+- **提示学习策略 (Prompt Strategy)**：支持 `base`、`few_shot`、`cot`、`few_shot_cot` 四种任务提示策略，便于直接做 ablation。
 - **混合评估 (Evaluation)**：
   - **BFI-44**: 标准人格量表，采用规则计分逻辑。
   - **生成任务**: 社交场景回复任务，支持 **LLM-as-Judge** (由高能力模型打分)。
@@ -65,6 +66,13 @@ OPENAI_API_KEY=your_sk_key_here
 uv run main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi
 ```
 
+使用 few-shot 或 CoT 做对比实验时，只需要增加 `--prompt-strategy`：
+
+```bash
+uv run main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi --prompt-strategy few_shot
+uv run main_closed.py --model gpt-5.2 --activation-method prompt --activation-type base --task bfi --prompt-strategy cot
+```
+
 ### 激发态对比测试
 
 指定特定激活（如 prompt + extraversion）：
@@ -110,9 +118,16 @@ uv run python scripts/compare_activation_outputs.py \
 uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activation-type agreeableness --task social_scenario --judge deepseek
 ```
 
+如果要比较 few-shot + CoT 组合策略：
+
+```bash
+uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activation-type agreeableness --task social_scenario --prompt-strategy few_shot_cot --judge deepseek
+```
+
 说明：`main_closed.py` 只支持 `prompt` 激活；`main_open.py` 支持 `prompt` 和 `vector`。
 主流程会根据 `--activation-method` 自动读取 `data/activation/<method>.json`。
 `LLM-as-Judge` 评分现使用 `0~10` 整数分制。
+任务层提示策略由 `--prompt-strategy` 控制，结果表中会新增 `prompt_strategy` 字段。
 
 ### Bragging Generation 任务
 
@@ -135,9 +150,11 @@ uv run main_open.py --model Qwen3-8B-Instruct --activation-method prompt --activ
 
 - `main_open.py`: 开源模型实验入口。
 - `main_closed.py`: 闭源模型实验入口。
+- `data/prompts/few_shot_examples.json`: few-shot 示例库，可按任务继续扩展。
 - `config.yaml`: 外部路径与 API 基础配置。
 - `src/`:
   - `models/`: 模型驱动层（`api_model.py`, `local_model.py`）。
+  - `prompting/`: 任务层提示策略构建（base/few-shot/CoT）。
   - `tasks/`: 任务定义层（`bfi_task.py`, `generation_task.py`）。
   - `activation/`: 人格激发逻辑。
   - `scoring/`: 自动评分逻辑 (`LLMJudge`)。
