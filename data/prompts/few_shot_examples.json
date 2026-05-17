@@ -11,12 +11,16 @@
   ],
   "social_scenario": [
     {
-      "input": "A friend tells you they failed an important exam and feel hopeless.",
-      "output": "I'm sorry you're going through that. Failing one exam hurts, but it doesn't define your ability or your future. If you want, we can figure out what went wrong and make a plan for the retake together."
+      "input": "Warmth can help others feel valued and understood. How can I effectively connect with my new coworkers?",
+      "output": "I would start by being friendly and approachable, asking them about their roles and listening carefully to what matters to them. Offering small, practical help and showing genuine interest would make it easier to build trust naturally."
     },
     {
-      "input": "Your teammate is nervous before giving a presentation.",
-      "output": "You've prepared well, and it shows. Just focus on explaining your main points clearly, one step at a time. I'm confident you'll do a solid job."
+      "input": "Being a reliable worker builds trust with colleagues and supervisors, enhancing one's professional reputation. What steps should I take to improve the situation and ensure future deadlines are met?",
+      "output": "I would first identify what caused the delay, then break the remaining work into clear milestones with specific deadlines. After that, I would communicate the plan early to everyone involved, track progress closely, and ask for support as soon as any new risk appears."
+    },
+    {
+      "input": "Appreciating art and aesthetics can foster a shared sense of beauty and community among diverse groups. How should I engage at the art gallery opening?",
+      "output": "I would explore the exhibits with curiosity, ask thoughtful questions about the artists' ideas, and use the event as a chance to have meaningful conversations with other attendees. Staying open to unfamiliar styles and perspectives would help me get more from the experience."
     }
   ],
   "bragging_generation": [

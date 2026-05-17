@@ -1,92 +1,677 @@
 [
   {
     "id": "social_001",
-    "dimension": "Extraversion",
-    "rubric": "Does the response show enthusiasm for social interaction, energy, and talkativeness?",
-    "scenario": "Your team just finished a major project. A colleague suggests throwing a big celebration party and inviting everyone from the office. How do you respond?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Avoiding quarrels maintains focus on goals and objectives. Should I approach Eshwar to catch up on old times?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 25
   },
   {
     "id": "social_002",
     "dimension": "Agreeableness",
-    "rubric": "Does the response demonstrate empathy, warmth, and a desire to help rather than judge?",
-    "scenario": "A close friend confides in you that they have been struggling with depression and have not told anyone else. They ask for your advice. What do you say to them?"
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Trust fosters openness, leading to better communication and understanding. How should I respond upon realizing my mistake?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 89
   },
   {
     "id": "social_003",
-    "dimension": "Conscientiousness",
-    "rubric": "Does the response reflect careful planning, organization, and a sense of responsibility?",
-    "scenario": "You have been assigned to lead an important project with a tight three-week deadline. Describe how you would approach and organize this work."
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Cooperation with others can lead to more efficient and effective teamwork in professional and personal settings. How should I respond to Miyako’s injury?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 104
   },
   {
     "id": "social_004",
-    "dimension": "Neuroticism",
-    "rubric": "Does the response reveal anxiety, worry, or emotional sensitivity about uncertain outcomes?",
-    "scenario": "You submitted a job application two weeks ago and have not heard back yet. The position is very important to you. How are you feeling and what are your thoughts right now?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Consistent politeness can set a standard for others to follow, improving overall civility. What steps should I take to manage my stress effectively?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 114
   },
   {
     "id": "social_005",
-    "dimension": "Openness",
-    "rubric": "Does the response show intellectual curiosity, creativity, and openness to new ideas or experiences?",
-    "scenario": "A friend invites you to attend an experimental art exhibition that combines classical music with live painting and poetry readings — a format you have never experienced before. How do you react?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Kindness can alleviate suffering and bring joy to others. How should I handle the distribution of treats to ensure all children are happy?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 142
   },
   {
     "id": "social_006",
     "dimension": "Agreeableness",
-    "rubric": "Does the response show willingness to compromise, forgive, and maintain harmony?",
-    "scenario": "A colleague takes credit for an idea you came up with in a team meeting in front of your manager. How do you handle this situation?"
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Forgiving others can free one from the burden of anger and resentment. What approach should I take to attending the party and interacting at the event?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 228
   },
   {
     "id": "social_007",
-    "dimension": "Conscientiousness",
-    "rubric": "Does the response show self-discipline and the ability to resist short-term temptation for long-term goals?",
-    "scenario": "You are preparing for an important exam next week, but your friends are inviting you to a fun weekend trip. How do you decide what to do?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "General trustworthiness can lead to more meaningful and deeper personal relationships. How should I approach Sofiarose to renew our friendship?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 250
   },
   {
     "id": "social_008",
-    "dimension": "Openness",
-    "rubric": "Does the response demonstrate imaginative thinking or unconventional problem-solving?",
-    "scenario": "If you could redesign the education system from scratch without any constraints, what would it look like? Describe your vision."
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Trust can lead to reduced anxiety about interpersonal relationships. How should I approach my neighbor to ask for some sugar?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 281
   },
   {
     "id": "social_009",
-    "dimension": "Extraversion",
-    "rubric": "Does the response show initiative in meeting others and comfort with being the center of attention?",
-    "scenario": "You are at a professional networking event where you don't know anyone. There is a group of people chatting near the buffet. How do you approach them?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Excessive trust can lead to critical lapses in judgment. Should I tell my friend that their behavior is hurting our friendship?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 558
   },
   {
     "id": "social_010",
-    "dimension": "Extraversion",
-    "rubric": "Does the response show high energy and a preference for stimulating, group-oriented activities?",
-    "scenario": "Your group of friends is undecided about what to do for New Year's Eve. One person suggests a quiet night in, while another suggests a large, crowded music festival. Which do you advocate for and why?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Constantly forgiving might enable poor behavior, reducing the incentive for positive change. Should I give my valuable belongings to Ellene to help them through their tough time?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 654
   },
   {
     "id": "social_011",
     "dimension": "Agreeableness",
-    "rubric": "Does the response show kindness and a tendency to trust or cooperate even when it's inconvenient?",
-    "scenario": "A neighbor you've only spoken to once asks if you can look after their two energetic dogs for the entire weekend because of a family emergency. How do you respond?"
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Avoiding quarrels can suppress necessary emotional expression. Should I try to cover up my mistake by ordering takeout and pretending it was planned?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 692
   },
   {
     "id": "social_012",
-    "dimension": "Conscientiousness",
-    "rubric": "Does the response show high attention to detail and a strong drive for achievement and order?",
-    "scenario": "You just realized there is a minor formatting error in a report you submitted to your boss an hour ago. It doesn't change the data, but it looks slightly unprofessional. What do you do?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Helping others excessively can lead to neglecting one's health and well-being. Should I continue to let friends stay at my place whenever they ask?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 754
   },
   {
     "id": "social_013",
-    "dimension": "Neuroticism",
-    "rubric": "Does the response show a tendency to experience negative emotions or feel overwhelmed by criticism?",
-    "scenario": "During a performance review, your manager gives you constructive but blunt feedback about a mistake you made last month. How do you feel and how do you respond?"
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Avoiding quarrels could lead to passive-aggressive behavior as emotions are bottled up. How should I handle the situation with Toltu?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 758
   },
   {
     "id": "social_014",
-    "dimension": "Neuroticism",
-    "rubric": "Does the response show vulnerability to stress and a tendency to worry about potential future problems?",
-    "scenario": "Your car breaks down on the highway while you are on your way to a very important appointment. You are already running a few minutes late. Describe your immediate reaction and thoughts."
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Avoiding quarrels could lead to passive-aggressive behavior as emotions are bottled up. How should I express my concerns to Liliani?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 759
   },
   {
     "id": "social_015",
+    "dimension": "Agreeableness",
+    "rubric": "Does the response demonstrate empathy, warmth, cooperativeness, and concern for maintaining positive relationships?",
+    "scenario": "Not finding faults may lead to stagnation in personal and professional development. How should I respond to Assiatou's dilemma about eating the cake?",
+    "source_dataset": "TRAIT",
+    "source_file": "Agreeableness-00000-of-00001.parquet",
+    "source_index": 913
+  },
+  {
+    "id": "social_016",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Avoiding laziness can lead to participation in community service and volunteer work, improving societal welfare. Should I offer constructive feedback and support to Shanequea to help improve their dish?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 27
+  },
+  {
+    "id": "social_017",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Making plans and following through with them helps in achieving personal goals and maintaining progress. How should I handle this situation?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 30
+  },
+  {
+    "id": "social_018",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Making plans and following through with them helps in achieving personal goals and maintaining progress. How should I approach my visit to Davud's home?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 32
+  },
+  {
+    "id": "social_019",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Being focused can lead to faster achievement of goals and objectives. How should I prepare for and behave at the cocktail party to make the most of this opportunity?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 95
+  },
+  {
+    "id": "social_020",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Persevering until the task is finished demonstrates commitment, leading to successful project completions. How should I handle the bill at the end of our meal?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 203
+  },
+  {
+    "id": "social_021",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Doing a thorough job can enhance one's ability to mentor and teach others, passing on valuable skills. How should I share my information during the meeting?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 223
+  },
+  {
+    "id": "social_022",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Avoiding laziness can contribute to a positive and energetic company culture. Should I actively participate in the weekly meetings and volunteer for the community outreach programs?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 238
+  },
+  {
+    "id": "social_023",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Efficiency can lead to more scalable operations in business. What should I do next after finding my wallet?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 432
+  },
+  {
+    "id": "social_024",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Efficiency can sometimes result in a lack of creativity, as quick solutions may overlook innovative approaches. Should I quit my job to pursue a career in art?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 517
+  },
+  {
+    "id": "social_025",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Never being lazy can lead to missing out on restorative downtime. Should I help the elderly person find their way or prioritize catching my business flight?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 574
+  },
+  {
+    "id": "social_026",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Reliability at work can result in taking on too many responsibilities, leading to burnout. Should I continue to take on more tasks despite my doubts about handling them?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 604
+  },
+  {
+    "id": "social_027",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Never being lazy can make one less approachable and more intimidating. Should I express my intense desire for Partick's job to my supervisor?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 616
+  },
+  {
+    "id": "social_028",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "The inability to be somewhat careless might stifle innovation. I have been planning a small gathering at my house for weeks, meticulously organizing every detail to ensure everything is perfect. However, on the day of the party, I start to worry that not everything is up to my high standards.",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 665
+  },
+  {
+    "id": "social_029",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "High efficiency might compromise the quality of work in some cases. How should I address my investment in the struggling startup?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 718
+  },
+  {
+    "id": "social_030",
+    "dimension": "Conscientiousness",
+    "rubric": "Does the response reflect responsibility, planning, self-discipline, and careful follow-through?",
+    "scenario": "Following plans rigidly can stifle spontaneity and personal growth. Should I attend the graduation ceremony?",
+    "source_dataset": "TRAIT",
+    "source_file": "Conscientiousness-00000-of-00001.parquet",
+    "source_index": 733
+  },
+  {
+    "id": "social_031",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Never being shy opens up a world of possibilities in travel and exploration. How should I approach this networking event to maximize my opportunities?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 6
+  },
+  {
+    "id": "social_032",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Never being shy encourages continual personal growth and learning. How should I approach my colleague for help with the software?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 163
+  },
+  {
+    "id": "social_033",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Outgoing individuals can quickly adapt to leadership roles in various contexts. How should I contribute to this meeting?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 225
+  },
+  {
+    "id": "social_034",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Not being reserved allows for full participation in democratic and civic activities. What approach should I take during the dinner to ensure a welcoming and engaging environment for my colleagues?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 284
+  },
+  {
+    "id": "social_035",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Talkative people can be influential in public speaking and advocacy roles. How can I use my extroverted personality to make a positive impact in this community?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 348
+  },
+  {
+    "id": "social_036",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Talkative individuals are often good at expressing themselves clearly. How should I approach the situation to mend the relationship?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 429
+  },
+  {
+    "id": "social_037",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Confidence can reduce feelings of stress and anxiety, leading to better mental health. How should I share my embarrassing story to enhance the mood and camaraderie among friends?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 432
+  },
+  {
+    "id": "social_038",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Assertiveness can prevent misunderstandings by ensuring clear communication. Should I stay at the party longer, even though it's getting late?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 459
+  },
+  {
+    "id": "social_039",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Excessive sociability might distract from focusing on individual goals or personal development. How should I handle this situation to remain professional?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 558
+  },
+  {
+    "id": "social_040",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "High energy can be misdirected, leading to less productivity instead of more. How should I handle my alcohol consumption at the event?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 603
+  },
+  {
+    "id": "social_041",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Never being quiet can lead to a constant state of noise, which can be stressful and unproductive. How should I present the plan to ensure it is well-received and encourages team collaboration?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 714
+  },
+  {
+    "id": "social_042",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Being excessively outgoing might lead to burnout from constant social interaction. How do I handle the situation when I am confronted about my double-booking?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 777
+  },
+  {
+    "id": "social_043",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "An overly assertive demeanor might be off-putting in collaborative environments. How should I conduct myself during the recording of the video?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 825
+  },
+  {
+    "id": "social_044",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "An overly assertive demeanor might be off-putting in collaborative environments. How should I address the issue of the scoring error with my friends?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 828
+  },
+  {
+    "id": "social_045",
+    "dimension": "Extraversion",
+    "rubric": "Does the response show sociability, assertiveness, enthusiasm, and comfort engaging with others?",
+    "scenario": "Being too sociable can lead to a dilution of personal identity, as one constantly adapts to fit in with various groups. How should I manage my time during the move?",
+    "source_dataset": "TRAIT",
+    "source_file": "Extraversion-00000-of-00001.parquet",
+    "source_index": 890
+  },
+  {
+    "id": "social_046",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Emotional instability can make a person more relatable and human to others, fostering deeper connections. How should I handle the date invitation given my financial situation?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 94
+  },
+  {
+    "id": "social_047",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "A worrisome attitude can lead to comprehensive preparations for various life scenarios. How can I move past this mistake and stop worrying about it?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 99
+  },
+  {
+    "id": "social_048",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Worrying a lot can lead to proactive problem-solving and risk management. How should I interact with my former teacher to make the most of this reconnection?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 104
+  },
+  {
+    "id": "social_049",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Showing strong emotions can break down social and cultural barriers, fostering a more open society. What is the best approach to completing my overdue assignment?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 159
+  },
+  {
+    "id": "social_050",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Nervous individuals often excel in environments where careful attention and quick reaction times are beneficial. How should I respond to this news?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 220
+  },
+  {
+    "id": "social_051",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Being easily nervous can make one cautious, which is crucial in high-stakes environments. How should I address my concerns about the project?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 270
+  },
+  {
+    "id": "social_052",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "An unrelaxed lifestyle can keep one alert to opportunities and threats. How should I handle my nerves about the cake's reception at the party?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 284
+  },
+  {
+    "id": "social_053",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Showing strong reactions can sometimes highlight the seriousness of a situation to observers. How should I approach this new challenge?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 344
+  },
+  {
+    "id": "social_054",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Being depressed and blue can deepen one's empathy towards others' suffering. How should I proceed with the job application?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 352
+  },
+  {
+    "id": "social_055",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "The diversity of moods can provide a rich palette for artists, writers, and creators. What should I send to Goerge for their birthday to lift their spirits?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 367
+  },
+  {
+    "id": "social_056",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "High nervousness can lead to developing strategies to manage and channel anxiety productively. How should I go about finding aspirin in the office to deal with my headache?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 389
+  },
+  {
+    "id": "social_057",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Constant worrying can distract from important tasks or responsibilities. How should I address Maya’s behavior?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 618
+  },
+  {
+    "id": "social_058",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Moodiness can make it challenging to provide consistent care or attention to dependents. What should I do when I'm feeling too stressed to face my family at home?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 781
+  },
+  {
+    "id": "social_059",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Depression can distort the perception of reality, leading to negative thinking patterns that are hard to break. How should I respond to seeing the elderly person standing?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 867
+  },
+  {
+    "id": "social_060",
+    "dimension": "Neuroticism",
+    "rubric": "Does the response reveal anxiety, worry, emotional volatility, or heightened sensitivity to stress and criticism?",
+    "scenario": "Poor stress management can lead to overeating or poor dietary choices, impacting physical health. How should I handle my feelings of stress and anxiety tonight?",
+    "source_dataset": "TRAIT",
+    "source_file": "Neuroticism-00000-of-00001.parquet",
+    "source_index": 980
+  },
+  {
+    "id": "social_061",
     "dimension": "Openness",
-    "rubric": "Does the response show aesthetic sensitivity and a preference for variety and intellectual challenge?",
-    "scenario": "You are offered a chance to move to a foreign country for a year to work on a project in a completely different field than yours. The culture is very different from your own. How do you evaluate this opportunity?"
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Being sophisticated in arts and culture can inspire others to pursue education and personal development in these areas. How can I engage the community effectively during this garden cleanup?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 44
+  },
+  {
+    "id": "social_062",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Deep thinkers are often at the forefront of ethical reasoning and moral leadership. How should I respond to broaden the discussion?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 80
+  },
+  {
+    "id": "social_063",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Curiosity can drive scientific inquiry, which is fundamental to technological and medical advancements. How should I instruct my team to ensure the project's success and maintain team morale?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 127
+  },
+  {
+    "id": "social_064",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Avoiding routine can lead to a more stimulating and less monotonous life, reducing stress and increasing satisfaction. How should I spend my work bonus?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 300
+  },
+  {
+    "id": "social_065",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Knowledge of art and culture can make individuals more well-rounded and informed citizens. Should I introduce Kaymari to this artist?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 387
+  },
+  {
+    "id": "social_066",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Reflective thinking can lead to greater self-awareness and better personal decisions. How should I respond to Mashae's infidelity?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 470
+  },
+  {
+    "id": "social_067",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Non-conformity can lead to conflicts with traditional or conservative societal values. How do I handle the newfound attention and potential criticisms from those who doubted me?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 549
+  },
+  {
+    "id": "social_068",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Constant seeking of new experiences can lead to instability in personal relationships. Should I spend the evening discussing the intricate details of each artwork with other attendees?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 565
+  },
+  {
+    "id": "social_069",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Perceived aloofness from deep thinking can be misunderstood as unfriendliness. Noticing that the children are confused and uneasy, how should I adjust my approach?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 633
+  },
+  {
+    "id": "social_070",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Playing with ideas without execution can lead to a lack of tangible achievements. How should I approach this intriguing yet potentially risky situation?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 643
+  },
+  {
+    "id": "social_071",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "People who are highly open may struggle with adhering to structures and schedules. Should I continue to accept new projects and invitations despite my current time constraints?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 747
+  },
+  {
+    "id": "social_072",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Aesthetic values might not resonate in environments focused on efficiency and functionality. Should I indulge my curiosity and explore the shop, considering my high openness but also the potential for socially and personally bad outcomes?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 826
+  },
+  {
+    "id": "social_073",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "High openness can lead to less satisfaction in conventional or stable careers, causing frequent job changes. Should I drop my current tasks and go to the gym to relieve my stress?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 849
+  },
+  {
+    "id": "social_074",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Cultural sophistication can intimidate or exclude those with different backgrounds. Should I initiate a conversation about their cultural background if I run into someone on the street?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 944
+  },
+  {
+    "id": "social_075",
+    "dimension": "Openness",
+    "rubric": "Does the response show curiosity, imagination, aesthetic sensitivity, and willingness to explore unconventional ideas or experiences?",
+    "scenario": "Neglecting practical skills can lead to challenges in handling everyday situations. Should I serve these experimental pies at a family gathering?",
+    "source_dataset": "TRAIT",
+    "source_file": "Openness-00000-of-00001.parquet",
+    "source_index": 996
   }
 ]
