@@ -6,13 +6,13 @@ CLOSED_MODELS_REGISTRY = {
     "gpt-5.2": "gpt-5.2",
     "gemini-3.0": "gemini-3-flash-preview-thinking",
     "claude-4.5": "claude-opus-4-5-20251101",
-    "deepseek": "deepseek-v3.1",
+    "deepseek": "deepseek-v4-flash",
 }
 
 OPEN_MODELS_REGISTRY = {
     "Llama-3-8B": "/root/autodl-tmp/Meta-Llama-3-8B",
     "Qwen3-8B": "/home/home_ex/ShareFiles/Models/Qwen/Qwen3-8B",
-    "Qwen3-8B-Instruct": "/home/home_ex/ShareFiles/Models/Qwen/Qwen3-8B-Instruct"
+    "Qwen3-8B-Instruct": "/home/home_ex/guyuhao/Qwen3-8B-Instruct"
 }
 
 
