@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import csv
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -165,10 +166,20 @@ def normalize_true_label(activation_name: str) -> str | None:
     raw = activation_name.strip().lower()
     if raw == "base":
         return "base"
+
+    matches = [
+        label
+        for label in PERSONALITIES
+        if re.search(rf"(^|_){re.escape(label)}($|_)", raw)
+    ]
+    if len(matches) == 1:
+        return matches[0]
+
     for prefix in ("high_", "vector_"):
         if raw.startswith(prefix):
-            raw = raw[len(prefix) :]
-            break
+            candidate = raw[len(prefix) :].split("_", 1)[0]
+            return candidate if candidate in LABEL_SET else None
+
     return raw if raw in LABEL_SET else None
 
 
@@ -187,16 +198,18 @@ def discover_response_files(input_path: Path) -> list[Path]:
     return sorted(input_path.glob(f"*{TASK_SUFFIX}.jsonl"))
 
 
-def build_jobs(files: list[Path], include_base: bool) -> list[dict]:
+def build_jobs(files: list[Path], include_base: bool) -> tuple[list[dict], list[str]]:
     jobs = []
     skipped_files = 0
     skipped_rows = 0
+    unknown_files = []
 
     for path in files:
         activation_name = infer_activation_name_from_path(path)
         true_label = normalize_true_label(activation_name)
         if true_label is None:
             skipped_files += 1
+            unknown_files.append(path.name)
             LOGGER.warning("Skipping file with unknown activation label: %s", path.name)
             continue
         if true_label == "base" and not include_base:
@@ -226,7 +239,7 @@ def build_jobs(files: list[Path], include_base: bool) -> list[dict]:
         skipped_files,
         skipped_rows,
     )
-    return jobs
+    return jobs, unknown_files
 
 
 def build_prompt(item: dict) -> str:
@@ -450,9 +463,15 @@ async def async_main() -> None:
     if not files:
         raise FileNotFoundError(f"No bragging response files found under: {input_path}")
 
-    jobs = build_jobs(files, include_base=args.include_base)
+    jobs, unknown_files = build_jobs(files, include_base=args.include_base)
     if not jobs:
-        raise ValueError("No valid rows found for persona discernment.")
+        raise ValueError(
+            "No valid rows found for persona discernment. "
+            f"Checked {len(files)} files; unknown_label_files={unknown_files}. "
+            "Expected filenames like "
+            "'high_extraversion_bragging_generation_responses.jsonl' or "
+            "'vector_extraversion_base_bragging_generation_responses.jsonl'."
+        )
 
     default_output_dir = input_path if input_path.is_dir() else input_path.parent
     default_output_dir = default_output_dir / "persona_discernment"
